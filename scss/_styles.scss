@@ -1,0 +1,94 @@
+// فلش سفارشی برای Choices.js
+.choices[data-type*='select-one'] {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 53%;
+      left: 11.5px;
+      margin-top: -2.5px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px;
+      border-color: #333 transparent transparent;
+      pointer-events: none;
+    }
+  }
+
+  .choices__inner{
+    padding: 4.5px 26.5px 3.75px !important;
+    padding-left: 10px !important;
+    border-radius: 7px;
+    .choices__list{
+      padding-left: 0 !important;
+    }
+  }
+  
+  // استایل کلی باکس انتخاب زبان
+  .custom-language-switcher {
+    position: absolute;
+    top: -17px;
+    right: 35px;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    select {
+      padding: 0 20px;
+      padding-right: 40px;
+      border-radius: 12px;
+      background: none;
+      color: #333;
+      font-size: 15px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      transition: all 0.3s ease;
+    }
+  
+    @media (min-width: 1200px) {
+      position: relative !important;
+      top: 7px;
+      right: 23px;
+      // اگر نیاز به فلش داخلی باشد
+      /*
+      &::after {
+        content: "\25BE";
+        position: absolute;
+        top: 25%;
+        right: 23px;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #777;
+        pointer-events: none;
+      }
+      */
+    }
+  
+    @media (max-width: 480px) {
+      select {
+        width: 100%;
+      }
+    }
+  }
+  
+  // مرکزچینی مقدار انتخاب شده
+  #language-switcher-select {
+    text-align: center;
+  }
+  
+
+  @media (min-width: 1200px) {
+    #masthead .lang-fa .lang-box {
+      margin-top: -13px !important; 
+     left: 50px;
+ }
+  }
+
+
+  @media (max-width: 1200px) {
+    #masthead .lang-fa .lang-box {
+      position: absolute !important;
+      top: 24px !important;
+      left: -22px !important;
+ }
+  }
