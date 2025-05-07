@@ -263,22 +263,24 @@ $current_locale = substr(get_locale(), 0, 2);
             return; // جلوگیری از اجرای ریدایرکت در بخش مدیریت یا درخواست‌های AJAX
         }
     
-        // بررسی وجود کوکی preferred_lang
-        if (isset($_COOKIE['preferred_lang'])) {
-            $preferred_lang = urldecode($_COOKIE['preferred_lang']); // دیکد کردن مقدار کوکی
-            $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        // فقط وقتی کاربر در صفحه اصلی (homepage) است
+        if ($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '') {
+            if (isset($_COOKIE['preferred_lang'])) {
+                $preferred_lang = urldecode($_COOKIE['preferred_lang']); // دیکد کردن مقدار کوکی
+                $preferred_lang = rtrim($preferred_lang, '/');
     
-            // حذف اسلش انتهایی از هر دو URL برای جلوگیری از اختلاف‌های جزئی
-            $preferred_lang = rtrim($preferred_lang, '/');
-            $current_url = rtrim($current_url, '/');
+                // اگر آدرس فعلی با آدرس زبان متفاوت است، ریدایرکت کن
+                $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
+                             . "://" . $_SERVER['HTTP_HOST'];
     
-            // اگر کاربر در حال حاضر در URL ذخیره‌شده در کوکی نیست، ریدایرکت انجام شود
-            if ($current_url !== $preferred_lang) {
-                wp_redirect($preferred_lang);
-                exit;
+                if ($current_url !== $preferred_lang) {
+                    wp_redirect($preferred_lang, 301);
+                    exit;
+                }
             }
         }
     }
+    
     // public function handle_redirect() {
     //     if (is_admin() || wp_doing_ajax()) return;
 
