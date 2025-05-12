@@ -208,6 +208,24 @@ $current_locale = substr(get_locale(), 0, 2);
         </div>
     
         <script>
+            document.addEventListener('click', function(event) {
+    const langBox = document.querySelector('.lang-box');
+    const langToggle = document.querySelector('.lang-title');
+
+    // اگر منوی زبان یا عنوان آن وجود نداشتند، کاری نکن
+    if (!langBox || !langToggle) return;
+
+    // اگر روی عنوان منوی زبان کلیک شد، منو را باز/بسته کن
+    if (langToggle.contains(event.target)) {
+        langBox.classList.toggle('d-none');
+        return;
+    }
+
+    // اگر روی جای دیگری کلیک شد، منو را ببند
+    if (!langBox.contains(event.target)) {
+        langBox.classList.add('d-none');
+    }
+});
             document.addEventListener("DOMContentLoaded", function () {
                 const langTitle = document.querySelector(".lang-title");
                 const langBox = document.querySelector(".lang-box");
